@@ -1,13 +1,21 @@
 # repo-migration
 migrate repo from organization to another. Repo descriptions, topics are also migrated automatically.
 
+<h3 data-pm-slice="0 0 []" data-ke-size="size23"><b>Use Guide</b></h3>
+
+use file following the guide. 
+1. fix the file based on your needs : (Origin Organization, Target Organization, Repository Name List)
+
+2. Execute the file as the example. 
+`bash repo-migration.sh github_user_id github_PAT`
+
+
 <p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
 <h3 data-pm-slice="0 0 []" data-ke-size="size23"><b>배경</b></h3>
 <p data-pm-slice="0 0 []" data-ke-size="size16">프로젝트의 상표권 문제 등으로 기존 운영 Organization을 새로운 이름의 Organization으로 마이그레이션을 해야 하는 상황을 맞이해, 기존에 운영하던 100개 이상의 레포지토리들을 새로운 곳으로 옮겨줘야 하는 문제가 발생했다. 이를 해결하기 위해 깃헙 레포지토리들을 옮기는 방법들에 대해 공부할 겸 포스트를 정리했다.&nbsp;</p>
 <p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
 <p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
-<p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
-<p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
+
 <h3 data-pm-slice="0 0 []" data-ke-size="size23"><b>해결책에 대한 가설</b></h3>
 <p data-ke-size="size16">&nbsp;</p>
 <p>[##_Image|kage@CYf7Z/btrymH1XnKL/fEqYHx02L3g1ZsSidLLSx0/img.png|CDM|1.3|{"originWidth":768,"originHeight":499,"style":"alignCenter","width":580,"height":377,"caption":"Mirroring&amp;nbsp;a&amp;nbsp;Repository&amp;nbsp;@GitHub&amp;nbsp;Docs ​"}_##]</p>
