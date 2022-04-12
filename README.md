@@ -17,9 +17,6 @@ use file following the guide.
 <p data-pm-slice="0 0 []" data-ke-size="size16">&nbsp;</p>
 
 <h3 data-pm-slice="0 0 []" data-ke-size="size23"><b>해결책에 대한 가설</b></h3>
-<p data-ke-size="size16">&nbsp;</p>
-<p>[##_Image|kage@CYf7Z/btrymH1XnKL/fEqYHx02L3g1ZsSidLLSx0/img.png|CDM|1.3|{"originWidth":768,"originHeight":499,"style":"alignCenter","width":580,"height":377,"caption":"Mirroring&amp;nbsp;a&amp;nbsp;Repository&amp;nbsp;@GitHub&amp;nbsp;Docs ​"}_##]</p>
-<p data-ke-size="size16">&nbsp;</p>
 <p data-pm-slice="0 0 []" data-ke-size="size16"><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository</a></p>
 <figure id="og_1649074331812" contenteditable="false" data-ke-type="opengraph" data-ke-align="alignCenter" data-og-type="article" data-og-title="Duplicating a repository - GitHub Docs" data-og-description="Note: If you have a project hosted on another version control system, you can automatically import your project to GitHub using the GitHub Importer tool. For more information, see &quot;About GitHub Importer.&quot; Before you can push the original repository to your" data-og-host="docs.github.com" data-og-source-url="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" data-og-url="http://ghdocs-prod.azurewebsites.net:80/en/repositories/creating-and-managing-repositories/duplicating-a-repository" data-og-image="https://scrap.kakaocdn.net/dn/bdXBpl/hyNVSLPT1j/uFB8kvKy23t7W1mabOIWzk/img.png?width=1200&amp;height=1200&amp;face=0_0_1200_1200"><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener" data-source-url="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository">
 <div class="og-image" style="background-image: url('https://scrap.kakaocdn.net/dn/bdXBpl/hyNVSLPT1j/uFB8kvKy23t7W1mabOIWzk/img.png?width=1200&amp;height=1200&amp;face=0_0_1200_1200');">&nbsp;</div>
@@ -38,7 +35,7 @@ use file following the guide.
 <h3 data-pm-slice="0 0 []" data-ke-size="size23"><b>가설 검증</b></h3>
 <p data-ke-size="size16">우선 전체 Organization에 직접 적용하기 이전에 개인 레포로 복제해보는 검증 작업을 진행해보았다.&nbsp;</p>
 <p data-ke-size="size16">&nbsp;</p>
-<pre id="code_1649074457167" class="shell" data-ke-language="shell" data-ke-type="codeblock"><code>git clone --bare https://github.com/spaceone-dev/integration-test.git
+<pre id="code_1649074457167" class="shell" data-ke-language="shell" data-ke-type="codeblock"><code>git clone --bare https://github.com/*******/integration-test.git
 간략한 저장소로('integration-test.git') 복제합니다...
 remote: Enumerating objects: 179, done.
 remote: Counting objects: 100% (179/179), done.
@@ -93,19 +90,19 @@ To https://github.com/joon0615/migration_validation_integration-test.git
 <p data-ke-size="size16">git push --mirror 옵션 사용 전, 옮길 위치에 신규 레포지토리를 생성해야 하므로, 그 생성 과정에서 기존 레포지토리의 description과 topic 데이터를 api로 가져와 추가하는 방식을 통해 우회적으로 해결 가능하다. 검증 작업을 걸쳐 실현 가능성을 검토해보니 성공적이었으므로, 마이그레이션 작업 시 관련 스크립트를 작성해 자동화하면 될 것으로 예상한다.&nbsp;</p>
 <p data-ke-size="size16">&nbsp;</p>
 <p data-ke-size="size16"><span style="background-color: #f6e199;"><b>우선 description 관련 검증 작업을 진행했다.&nbsp;</b></span></p>
-<pre id="code_1649074896352" class="shell" data-ke-language="shell" data-ke-type="codeblock"><code>DESCRIPTION=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/spaceone-dev/migration-test-0404 | grep description)
+<pre id="code_1649074896352" class="shell" data-ke-language="shell" data-ke-type="codeblock"><code>DESCRIPTION=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/*********/migration-test-0404 | grep description)
 echo $DESCRIPTION
 &gt;&gt;&gt; "description": "test repo for migration",
 
 curl -X POST -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/orgs/spaceone-dev/repos \
+  https://api.github.com/orgs/**********/repos \
   -d '{"name":"migration-test-0404", "description":"test repo for migration"}' \
   -u "joon0615:*********************"
 {
   "id": 477564217,
   "node_id": "R_kgDOHHcNOQ",
   "name": "migration-test-0404",
-  "full_name": "spaceone-dev/migration-test-0404",
+  "full_name": "********/migration-test-0404",
   "private": false,
   ...
 }</code></pre>
@@ -121,12 +118,11 @@ curl -X POST -H "Accept: application/vnd.github.v3+json" \
 <p data-ke-size="size16">&nbsp;</p>
 <p data-ke-size="size16"><span style="background-color: #f6e199;"><b>다음으로 topic 관련 검증 작업을 진행했다.&nbsp; </b></span></p>
 <pre id="code_1649075038260" class="shell" data-ke-language="shell" data-ke-type="codeblock"><code>curl -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/spaceone-dev/console/topics
+  https://api.github.com/repos/***********/console/topics
 {
   "names": [
     "core",
     "console",
-    "spaceone",
     "vue",
     "composition-api",
     "vuejs",
@@ -134,7 +130,7 @@ curl -X POST -H "Accept: application/vnd.github.v3+json" \
   ]
 
 curl -X PUT -H "Accept: application/vnd.github.v3+json" \
-  https://api.github.com/repos/spaceone-dev/migration-test-0404/topics \
+  https://api.github.com/repos/*********/migration-test-0404/topics \
   -d '{"names":["test", "console"]}' \ 
   -u "joon0615:********************"
 
